@@ -21,5 +21,14 @@ if __name__ == "__main__":
 			print(task)
 		print("Any other tasks you would like to cross off?")
 		ans = input()
-
 	print("Great")
+
+	print("Any tasks you would like to add?")
+	ans = input()
+	while ans != "No":
+		print("What is the name of the task?")
+		name = input()
+		for task in reversed(task_lst):
+			print("Is {} more important than {}".formate(name, task))
+			if input() == "Yes":
+				task 
