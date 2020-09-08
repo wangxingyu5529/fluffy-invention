@@ -17,23 +17,29 @@ should take the order
 
 # Use queue to arrange incoming ride requests
 
-queue_request = []
+class Request(object): 
 
-elevator1 = Elevator(1)
-elevator2 = Elevator(5)
+	def __init__(arrival_time, from_floor, to_floor):
+		self.arrival_time = arrival_time
+		self.start_time = None
+		self.from_floor = from_floor
+		self.to_floor = to_floor
 
-while True: 
-	if len(queue_request) == 0: 
-		elevator.current_floor = self.default_floor
-	else: 
-		if (not elevator1.occupied) and (not elevator2.occupied):
+class Elevators(object): 
+
+	def __init__(num_elevators):
+		self.__line = queue.PriorityQueue(maxsize=num_elevators)
+
+	def remove_person(self): 
+		return self.__line.get(block=False)[1]
+
+	def put_person(self, request):
+		# the priorityqueue sort requests by arrival time
+		return self.__line.put((request.arrival_time, request), block=False)
+
+	def isfull(self): 
+		return self.__line.full()
 			
 
 
-class Elevator: 
-	def __init__(default_floor):
-		self.default_floor = default_floor
-		self.current_floor = default_floor # We denote basement as floor 0
-		self.occupied = False
 
-	def incoming_request(from_floor):
